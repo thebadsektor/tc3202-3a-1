@@ -1,0 +1,98 @@
+body {
+  background: #f4f4f9;
+  font-family: 'Arial', sans-serif;
+}
+
+.home-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007bff;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropzone {
+  border: 2px dashed #007bff;
+  padding: 30px;
+  text-align: center;
+  background: #eaf4ff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dropzone:hover {
+  background: #d0e6ff;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn.logout-btn {
+  background: #ff4d4d;
+  color: white;
+}
+
+.btn.logout-btn:hover {
+  background: #d43d3d;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.clear-btn {
+  background: #ccc;
+}
+
+.clear-btn:hover {
+  background: #b0b0b0;
+}
+
+.process-btn {
+  background: #007bff;
+  color: white;
+}
+
+.process-btn:hover {
+  background: #0056b3;
+}
+
+.analyze-btn {
+  background: #28a745;
+  color: white;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.analyze-btn:hover {
+  background: #1e7e34;
+}
+
+.analysis-result {
+  background: #fffbea;
+  border-left: 5px solid #f4c542;
+}
