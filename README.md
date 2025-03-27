@@ -126,7 +126,7 @@ Outline the project timeline, including milestones or deliverables. Example:
 - **Week 1-2 (Feb 3)**: Concept Paper Proposal.
 - **Week 3-5 (Feb 25)**: Consultation.
 - **Week 6-10 (Mar 10)**: Plan user journey and refinement.
-- **Week 7-8 (Mar 11)**: Refinement
+- **Week 7-8 (Mar 11)**: Refinement.
 - **Week 13-14 (Mar 18)**: Repository preparation & Research.
       -Related Repository
 - **Week 13-14**:

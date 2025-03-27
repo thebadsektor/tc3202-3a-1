@@ -9,7 +9,7 @@ import * as pdfjsLib from "pdfjs-dist/webpack";
 import "pdfjs-dist/build/pdf.worker";
 import "../styles/Home.css";
 
-const API_URL = "http://127.0.0.1:8000/analyze-resume/";
+const API_URL = "http://127.0.0.1:8000";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
@@ -18,6 +18,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [analysisResult, setAnalysisResult] = useState(null);
+  const [topicModelingResult, setTopicModelingResult] = useState(null);
   const [resumeText, setResumeText] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -34,6 +35,7 @@ const Home = () => {
   const handleClearFiles = () => {
     setFiles([]);
     setAnalysisResult(null);
+    setTopicModelingResult(null);
     setResumeText("");
   };
 
@@ -57,27 +59,50 @@ const Home = () => {
 
   const analyzeResume = async () => {
     if (!resumeText) return;
+    setAnalysisResult(null);
+    setTopicModelingResult(null);
     setLoading(true);
+  
     try {
-      const response = await axios.post(
-        API_URL,
-        JSON.stringify({ resumeText }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const candidates = response.data.candidates;
-      if (candidates && candidates.length > 0) {
-        setAnalysisResult(candidates[0].content.parts[0].text);
+      const response = await axios.post(`${API_URL}/analyze-resume/`, { resumeText });
+      
+      // Extract structured content from Gemini API response
+      const aiResponse = response.data;
+      if (aiResponse && aiResponse.candidates) {
+        const analysisText = aiResponse.candidates[0].content.parts[0].text;
+        setAnalysisResult(analysisText);
       } else {
-        setAnalysisResult(" No analysis result.");
+        setAnalysisResult("Analysis failed. Unexpected API response format.");
       }
     } catch (error) {
       console.error("Error analyzing resume:", error.response?.data || error.message);
-      setAnalysisResult(" Failed to analyze resume. Please try again.");
+      setAnalysisResult("Failed to analyze resume. Please try again.");
     }
+  
     setLoading(false);
   };
+  
+  const analyzeTopics = async () => {
+    if (!resumeText) return;
+    setLoading(true);
+    
+    try {
+      const response = await axios.post(`${API_URL}/analyze-topics/`, { resumeText });
+  
+      if (response.data && response.data.job_roles) {  // ✅ Change "topics" to "job_roles"
+        setTopicModelingResult(response.data.job_roles);
+      } else {
+        setTopicModelingResult(["Failed to analyze topics. Unexpected response format."]);
+      }
+    } catch (error) {
+      console.error("Error analyzing topics:", error.response?.data || error.message);
+      setTopicModelingResult(["Failed to analyze job roles. Please try again."]);
+    }
+  
+    setLoading(false);
+  };
+  
+  
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
@@ -95,14 +120,14 @@ const Home = () => {
         <h2>Welcome, {user ? user.email : "Guest"}!</h2>
         <div {...getRootProps()} className="dropzone">
           <input {...getInputProps()} />
-          <p> Drag & drop a PDF here, or click to upload</p>
+          <p>Drag & drop a PDF here, or click to upload</p>
         </div>
       </div>
 
       {files.length > 0 && (
         <div className="card">
           <h3>Uploaded File:</h3>
-          <ul>{files.map((file, index) => (<li key={index}> {file.name}</li>))}</ul>
+          <ul>{files.map((file, index) => (<li key={index}>{file.name}</li>))}</ul>
           <div className="btn-group">
             <button onClick={handleClearFiles} className="btn clear-btn">Clear</button>
             <button onClick={extractTextFromPDF} className="btn process-btn">Extract Text</button>
@@ -111,18 +136,27 @@ const Home = () => {
       )}
 
       {resumeText && !loading && (
-        <button onClick={analyzeResume} className="btn analyze-btn">Analyze Resume</button>
+        <>
+          <button onClick={analyzeResume} className="btn analyze-btn">Analyze Resume</button>
+          <button onClick={analyzeTopics} className="btn analyze-btn">Analyze Topics</button>
+        </>
       )}
 
-      {loading && <p> Analyzing resume... Please wait.</p>}
+      {loading && <p>Analyzing... Please wait.</p>}
 
-      {analysisResult && !loading && (
-  <div className="card analysis-result">
-    <h3>Resume Analysis:</h3>
-    <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>{analysisResult}</pre>
-  </div>
-)}
+      {analysisResult && (
+        <div className="card analysis-result">
+          <h3>Resume Analysis:</h3>
+          <pre>{analysisResult}</pre>
+        </div>
+      )}
 
+      {topicModelingResult && (
+        <div className="card topic-result">
+          <h3>Extracted Topics:</h3>
+          <ul>{topicModelingResult.map((topic, index) => (<li key={index}>{topic}</li>))}</ul>
+        </div>
+      )}
     </div>
   );
 };

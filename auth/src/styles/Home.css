@@ -92,7 +92,47 @@ body {
   background: #1e7e34;
 }
 
+/* Resume Analysis Styling */
 .analysis-result {
   background: #fffbea;
   border-left: 5px solid #f4c542;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-result pre {
+  white-space: pre-wrap; /* Ensures text wraps */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  padding: 10px;
+  background-color: #f8f9fa; /* Light background */
+  border-radius: 5px;
+}
+
+/* Extracted Topics Styling (Same as Resume Analysis) */
+.topic-result {
+  background: #f8f9fa; /* Light gray background */
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #007bff; /* Blue left border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.topic-result h3 {
+  color: #007bff;
+}
+
+.topic-result ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.topic-result li {
+  background: #e3f2fd; /* Light blue background */
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  font-weight: bold;
 }
