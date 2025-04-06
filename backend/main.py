@@ -10,6 +10,12 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+API_KEY = os.getenv("GOOGLE_API_KEY")
+
 # Download required NLTK datasets
 nltk.download("punkt")
 nltk.download('punkt_tab')
@@ -31,10 +37,18 @@ app.add_middleware(
 class ResumeRequest(BaseModel):
     resumeText: str
 
+MONTHS = {
+    "january", "jan", "february", "feb", "march", "mar", "april", "apr", "may", "june", "jun",
+    "july", "jul", "august", "aug", "september", "sep", "october", "oct", "november", "nov", "december", "dec"
+}
+LOCATION_TERMS = {
+    "province", "city", "state", "country", "region", "district", "area", 
+    "village", "municipality", "town", "location", "zipcode", "barangay"
+}
 # Custom stopwords for resumes (improves accuracy)
 CUSTOM_STOPWORDS = set(stopwords.words("english")).union(
-    {"resume", "experience", "work", "job", "position", "role", "company", "skills"}
-)
+    {"resume", "experience", "work", "job", "position", "role", "company", "skills", "responsibilities", "summary"}
+).union(MONTHS).union(LOCATION_TERMS)
 
 # Function: Clean and Preprocess Text (Using NLTK)
 def preprocess_text(text):
@@ -137,7 +151,6 @@ Resume:
     }
 
     GOOGLE_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
-    API_KEY = "AIzaSyBdh3Bcn8ik-kf-IKAt8nx_yjpfLWw1F6s"  # Replace with your actual Google API Key
 
     # Send Request to Google API
     try:
