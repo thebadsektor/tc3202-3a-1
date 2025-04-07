@@ -1,42 +1,46 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware
-import requests
-import re
-import nltk
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.decomposition import LatentDirichletAllocation
+# Import necessary libraries and modules
+from fastapi import FastAPI, HTTPException  # FastAPI core and error handling
+from pydantic import BaseModel  # Data validation model
+from fastapi.middleware.cors import CORSMiddleware  # CORS configuration
+import requests  # For making API requests
+import re  # Regex for text preprocessing
+import nltk  # Natural Language Toolkit for NLP tasks
+from nltk.tokenize import word_tokenize  # Tokenizer
+from nltk.corpus import stopwords  # Stopwords list
+from nltk.stem import WordNetLemmatizer  # Lemmatizer
+from sklearn.feature_extraction.text import TfidfVectorizer  # Feature extraction
+from sklearn.decomposition import LatentDirichletAllocation  # Topic modeling
 
-from dotenv import load_dotenv
-import os
+from dotenv import load_dotenv  # Load environment variables
+import os  # OS module to access environment variables
 
+# Load environment variables from .env file
 load_dotenv()
-API_KEY = os.getenv("GOOGLE_API_KEY")
+API_KEY = os.getenv("GOOGLE_API_KEY")  # Fetch Google API key
 
-# Download required NLTK datasets
-nltk.download("punkt")
-nltk.download('punkt_tab')
-nltk.download("wordnet")
-nltk.download("stopwords")
+# Download necessary NLTK datasets
+nltk.download("punkt")  # Tokenizer model
+nltk.download('punkt_tab')  # Optional, might not be required
+nltk.download("wordnet")  # WordNet Lemmatizer model
+nltk.download("stopwords")  # Stopwords
 
+# Initialize FastAPI app
 app = FastAPI()
 
-# Enable CORS
+# Enable CORS for frontend communication
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000"],  # Frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Define Request Model
+# Define the request body schema
 class ResumeRequest(BaseModel):
-    resumeText: str
+    resumeText: str  # Expecting resume text from frontend
 
+# Define extra stopword sets for improved filtering
 MONTHS = {
     "january", "jan", "february", "feb", "march", "mar", "april", "apr", "may", "june", "jun",
     "july", "jul", "august", "aug", "september", "sep", "october", "oct", "november", "nov", "december", "dec"
@@ -45,38 +49,40 @@ LOCATION_TERMS = {
     "province", "city", "state", "country", "region", "district", "area", 
     "village", "municipality", "town", "location", "zipcode", "barangay"
 }
-# Custom stopwords for resumes (improves accuracy)
+
+# Combine all stopwords into a custom list for resume cleaning
 CUSTOM_STOPWORDS = set(stopwords.words("english")).union(
     {"resume", "experience", "work", "job", "position", "role", "company", "skills", "responsibilities", "summary"}
 ).union(MONTHS).union(LOCATION_TERMS)
 
-# Function: Clean and Preprocess Text (Using NLTK)
+# Preprocess resume text
 def preprocess_text(text):
-    text = text.lower()  # Convert to lowercase
+    text = text.lower()  # Lowercase
     text = re.sub(r"\d+", "", text)  # Remove numbers
     text = re.sub(r"\W+", " ", text)  # Remove special characters
     
-    tokens = word_tokenize(text)
-    lemmatizer = WordNetLemmatizer()
+    tokens = word_tokenize(text)  # Tokenize text
+    lemmatizer = WordNetLemmatizer()  # Initialize lemmatizer
     
+    # Remove stopwords and lemmatize
     words = [lemmatizer.lemmatize(word) for word in tokens if word.isalpha() and word not in CUSTOM_STOPWORDS]
     
-    return " ".join(words)
+    return " ".join(words)  # Return cleaned text
 
-# Root Route (Check if running)
+# Root endpoint to test if backend is running
 @app.get("/")
 def root():
     return {"message": "FastAPI is running!"}
 
-# Resume Analysis Route (Using Gemini API)
+# Endpoint to analyze resume using Gemini API
 @app.post("/analyze-resume/")
 def analyze_resume(request: ResumeRequest):
-    print("🔹 Received Resume Text for Analysis")  # Debugging Log
+    print("🔹 Received Resume Text for Analysis")  # Log
 
-    if not request.resumeText.strip():
+    if not request.resumeText.strip():  # Check if resume is empty
         raise HTTPException(status_code=400, detail="Resume text cannot be empty.")
 
-    headers = {"Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json"}  # Set headers
     payload = {
         "contents": [{
             "parts": [{
@@ -152,57 +158,58 @@ Resume:
 
     GOOGLE_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
 
-    # Send Request to Google API
+    # Send POST request to Gemini API
     try:
         response = requests.post(
             f"{GOOGLE_API_URL}?key={API_KEY}",
             json=payload,
             headers=headers
         )
-        print("🔹 Google API Response Status:", response.status_code)  # Debugging Log
-        print("🔹 Google API Response:", response.text[:500])  # Log first 500 chars
+        print("🔹 Google API Response Status:", response.status_code)
+        print("🔹 Google API Response:", response.text[:500])  # First 500 chars
 
+        # Raise error if not successful
         if response.status_code != 200:
             raise HTTPException(status_code=response.status_code, detail=response.json())
 
-        return response.json()
+        return response.json()  # Return analysis response
 
     except requests.exceptions.RequestException as e:
         print("❌ Google API Request Failed:", str(e))
         raise HTTPException(status_code=500, detail="Failed to connect to Google API.")
 
-# Job Role Extraction (Topic Modeling)
+# Endpoint for topic modeling to extract job roles
 @app.post("/analyze-topics/")
 def analyze_topics(request: ResumeRequest):
-    print("🔹 Received Resume Text for Topic Modeling")  # Debugging Log
+    print("🔹 Received Resume Text for Topic Modeling")  # Log
 
     text = request.resumeText.strip()
     if not text:
         raise HTTPException(status_code=400, detail="Resume text cannot be empty.")
 
-    cleaned_text = preprocess_text(text)
+    cleaned_text = preprocess_text(text)  # Preprocess resume
 
-    # Ensure there is enough content for topic modeling
-    if len(cleaned_text.split()) < 10:  # At least 10 words
+    if len(cleaned_text.split()) < 10:  # Check word count
         return {"job_roles": ["Not enough text for analysis"]}
 
-    # Vectorization (Using TF-IDF for better results)
+    # Convert text to vector format using TF-IDF
     vectorizer = TfidfVectorizer(max_features=2000)
     X = vectorizer.fit_transform([cleaned_text])
 
-    # Check if vectorized text is empty
+    # If vectorized content is empty
     if X.shape[1] == 0:
         return {"job_roles": ["No significant terms found in the resume"]}
 
-    # LDA Topic Modeling (Detecting Job Roles)
+    # Run LDA for topic modeling
     lda = LatentDirichletAllocation(n_components=1, random_state=42, max_iter=10)
     lda.fit(X)
 
-    # Extracting Job Roles
+    # Extract top keywords as job roles
     job_roles = []
     for topic_idx, topic in enumerate(lda.components_):
-        topic_words = [vectorizer.get_feature_names_out()[i] for i in topic.argsort()[:-6:-1]]
+        topic_words = [vectorizer.get_feature_names_out()[i] for i in topic.argsort()[:-6:-1]]  # Top 5 words
         job_roles.append(", ".join(topic_words))
 
+    # Return job roles
     return {"job_roles": job_roles if job_roles else ["No job roles detected"]}
 
