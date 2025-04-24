@@ -35,73 +35,109 @@
   margin: 0.5rem 0;
 }
 
+.login-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5%;
+}
+
+.login-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #ff4d6d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #e03e5b;
+}
+
+.google-btn {
+  background-color: #db4437;
+}
+
+.google-btn:hover {
+  background-color: #c1351e;
+}
+
+.secondary-btn {
+  background-color: #718096;
+}
+
+.secondary-btn:hover {
+  background-color: #4a5568;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    height: auto;
+  }
+
+  .login-welcome {
+    padding: 1rem;
+    order: 1;
+  }
+
   .login-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-right: 5%;
+    padding: 1rem;
+    order: 2;
   }
 
   .login-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 350px;
-  }
-  
-  h2 {
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  .input-field {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
+    max-width: 100%;
   }
-  
-  .btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #ff4d6d;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
+
+  .login-welcome h1 {
+    font-size: 2.2rem;
   }
-  
-  .btn:hover {
-    background-color: #e03e5b;
+
+  .login-welcome h1 span {
+    font-size: 2.5rem;
   }
-  
-  .google-btn {
-    background-color: #db4437;
+
+  .login-welcome p {
+    font-size: 1rem;
+    max-width: 100%;
   }
-  
-  .google-btn:hover {
-    background-color: #c1351e;
-  }
-  
-  .secondary-btn {
-    background-color: #718096;
-  }
-  
-  .secondary-btn:hover {
-    background-color: #4a5568;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-  
+}

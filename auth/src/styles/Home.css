@@ -27,6 +27,12 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.card h2 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
 .dropzone {
   border: 2px dashed #007bff;
   padding: 30px;
@@ -175,5 +181,39 @@ body {
   }
   100% {
     opacity: 0.7;
+  }
+}
+
+/* ============================= */
+/* ✅ Mobile-Responsive Styling  */
+/* ============================= */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 10px;
+    margin: 20px auto;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+  }
+
+  .dropzone {
+    padding: 20px;
+  }
+
+  .analyze-btn {
+    margin-top: 10px;
   }
 }

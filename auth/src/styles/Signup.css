@@ -43,65 +43,101 @@
   padding-right: 5%;
 }
 
+.signup-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #5a67d8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #4c51bf;
+}
+
+.google-btn {
+  background-color: #db4437;
+}
+
+.google-btn:hover {
+  background-color: #c1351e;
+}
+
+.secondary-btn {
+  background-color: #718096;
+}
+
+.secondary-btn:hover {
+  background-color: #4a5568;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .signup-wrapper {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    height: auto;
+  }
+
+  .signup-welcome {
+    padding: 1rem;
+    order: 1;
+  }
+
+  .signup-container {
+    padding: 1rem;
+    order: 2;
+  }
+
   .signup-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 350px;
-  }
-  
-  h2 {
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  .input-field {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
+    max-width: 100%;
   }
-  
-  .btn {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #5a67d8;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
+
+  .signup-welcome h1 {
+    font-size: 2.2rem;
   }
-  
-  .btn:hover {
-    background-color: #4c51bf;
+
+  .signup-welcome h1 span {
+    font-size: 2.5rem;
   }
-  
-  .google-btn {
-    background-color: #db4437;
+
+  .signup-welcome p {
+    font-size: 1rem;
+    max-width: 100%;
   }
-  
-  .google-btn:hover {
-    background-color: #c1351e;
-  }
-  
-  .secondary-btn {
-    background-color: #718096;
-  }
-  
-  .secondary-btn:hover {
-    background-color: #4a5568;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-    font-size: 14px;
-  }
-  
+}
