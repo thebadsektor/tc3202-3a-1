@@ -49,6 +49,16 @@ const Signup = () => {
   };
 
   return (
+    <div className="signup-wrapper">
+    <div className="signup-welcome">
+    <h1>
+      Welcome to<br />
+      <span>Resume Analyzer</span>
+    </h1>
+    <p>Let's make your resume so good, HR will say, "Whoa!"</p>
+    <p><strong>Log in now</strong> to finally stop your resume from scaring recruiters.</p>
+  </div>
+
     <div className="signup-container">
       <div className="signup-box">
         <h2>Sign Up</h2>
@@ -82,6 +92,7 @@ const Signup = () => {
           Go to Login
         </button>
       </div>
+    </div>
     </div>
   );
 };
