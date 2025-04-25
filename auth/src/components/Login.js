@@ -9,7 +9,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -79,25 +78,10 @@ const Login = () => {
   </div>
 
     <div className="login-container">
-
-      <div  className="welcome-text">
-        <h1>
-          <span className="welcome-small">Welcome to</span><br />
-          <span className="welcome-big">Resume Analyzer</span>
-        </h1>
-        <h2>"Let's make your resume so good, HR will say, "Whoa"."<br /></h2>
-        <h3>
-          <span className="highlight">Login now</span> to finally stop your resume from scaring recruiters
-        </h3>
-      </div>
-
       <div className="login-box">
-
-        <h4>Login</h4>
+        <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
-
         <form onSubmit={handleLogin}>
-
           <input
             type="email"
             placeholder="Email"
@@ -106,40 +90,28 @@ const Login = () => {
             disabled={loading}
             className="input-field"
           />
-
           <input
-            type={showPassword ? "text" : "password"}
+            type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
             className="input-field"
           />
-
-          <div className="show-forgot">
-            <label><input  type="checkbox" onChange={(e) => setShowPassword(e.target.checked)}/> Show Password</label>
-            <button type="button" onClick={handleForgotPassword} disabled={loading} className="as-link show-forgot">Forgot Password?</button>
-          </div>
-
-          <button type="submit" disabled={loading} className="login-btn">
+          <button type="submit" disabled={loading} className="btn">
             {loading ? "Logging in..." : "Login"}
           </button>
-
-          <div class="divider">
-            <span>or</span>
-          </div>
-
-          <button onClick={handleGoogleLogin} disabled={loading} className="google-btn">
-            {loading ? "Processing..." : "Login with Google"}
-          </button>
-
-          <div className="signup">
-            <p2>Don't have an account?
-              <button type="button" onClick={() => navigate("/signup")} disabled={loading} className="as-link signup">Sign up Now!</button>
-            </p2>
-          </div>
-
         </form>
+        <button onClick={handleGoogleLogin} disabled={loading} className="btn google-btn">
+          {loading ? "Processing..." : "Login with Google"}
+        </button>
+        <button onClick={handleForgotPassword} disabled={loading} className="btn secondary-btn">
+          Forgot Password?
+        </button>
+        <p>Don't have an account?</p>
+        <button onClick={() => navigate("/signup")} disabled={loading} className="btn secondary-btn">
+          Go to Signup
+        </button>
       </div>
     </div>
     </div>
