@@ -68,6 +68,16 @@ const Login = () => {
   };
 
   return (
+    <div className="login-wrapper">
+    <div className="login-welcome">
+    <h1>
+      Welcome to<br />
+      <span>Resume Analyzer</span>
+    </h1>
+    <p>Let's make your resume so good, HR will say, "Whoa!"</p>
+    <p><strong>Log in now</strong> to finally stop your resume from scaring recruiters.</p>
+  </div>
+
     <div className="login-container">
 
       <div  className="welcome-text">
@@ -131,6 +141,7 @@ const Login = () => {
 
         </form>
       </div>
+    </div>
     </div>
   );
 };

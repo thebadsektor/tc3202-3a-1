@@ -1,5 +1,42 @@
-/* Signup.css */
+/* Signup.css */  
+.signup-wrapper {
+  display: flex;
+  height: 100vh;
+  background-image: url('/public/Image/Background/landing_bg.jpg');
+  color: white;
+}
+
+.signup-welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 5%;
+}
+
+.signup-welcome h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.signup-welcome h1 span {
+  font-size: 3.5rem;
+  color: #fff;
+}
+
+.signup-welcome p {
+  font-size: 1.1rem;
+  max-width: 400px;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
 .signup-container {
+<<<<<<< HEAD
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -9,9 +46,97 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+=======
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5%;
+}
+
+.signup-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #5a67d8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #4c51bf;
+}
+
+.google-btn {
+  background-color: #db4437;
+}
+
+.google-btn:hover {
+  background-color: #c1351e;
+}
+
+.secondary-btn {
+  background-color: #718096;
+}
+
+.secondary-btn:hover {
+  background-color: #4a5568;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .signup-wrapper {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    height: auto;
+>>>>>>> ea3f42854955504e5e176ad3e1b9f8024322cf07
   }
-  
+
+  .signup-welcome {
+    padding: 1rem;
+    order: 1;
+  }
+
+  .signup-container {
+    padding: 1rem;
+    order: 2;
+  }
+
   .signup-box {
+<<<<<<< HEAD
     background: white;
     text-align: center;
     margin-top: 20px;
@@ -54,14 +179,13 @@
   }
   
   .input-field {
+=======
+>>>>>>> ea3f42854955504e5e176ad3e1b9f8024322cf07
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
+    max-width: 100%;
   }
 
+<<<<<<< HEAD
   .show-pass {
     display: flex;
     margin-left: -4px;
@@ -135,3 +259,18 @@
     font-size: 14px;
   }
   
+=======
+  .signup-welcome h1 {
+    font-size: 2.2rem;
+  }
+
+  .signup-welcome h1 span {
+    font-size: 2.5rem;
+  }
+
+  .signup-welcome p {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+}
+>>>>>>> ea3f42854955504e5e176ad3e1b9f8024322cf07
