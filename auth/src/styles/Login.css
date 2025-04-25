@@ -2,7 +2,7 @@
 .login-wrapper {
   display: flex;
   height: 100vh;
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background-image: url('/public/Image/Background/landing_bg.jpg');
   color: white;
 }
 
