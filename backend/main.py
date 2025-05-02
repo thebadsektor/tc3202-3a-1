@@ -69,6 +69,11 @@ def preprocess_text(text):
     
     return " ".join(words)  # Return cleaned text
 
+# Function to chunk text into smaller parts
+def chunk_resume(text, chunk_size=50):
+    words = text.split()
+    return [" ".join(words[i:i + chunk_size]) for i in range(0, len(words), chunk_size)]
+
 # Root endpoint to test if backend is running
 @app.get("/")
 def root():
@@ -192,9 +197,12 @@ def analyze_topics(request: ResumeRequest):
     if len(cleaned_text.split()) < 10:  # Check word count
         return {"job_roles": ["Not enough text for analysis"]}
 
-    # Convert text to vector format using TF-IDF
+    # Chunk the resume text into smaller parts (optional: you can tweak chunk size as needed)
+    chunks = chunk_resume(cleaned_text, chunk_size=110)
+
+    # Convert chunks to vector format using TF-IDF
     vectorizer = TfidfVectorizer(max_features=2000)
-    X = vectorizer.fit_transform([cleaned_text])
+    X = vectorizer.fit_transform(chunks)
 
     # If vectorized content is empty
     if X.shape[1] == 0:
@@ -212,4 +220,3 @@ def analyze_topics(request: ResumeRequest):
 
     # Return job roles
     return {"job_roles": job_roles if job_roles else ["No job roles detected"]}
-

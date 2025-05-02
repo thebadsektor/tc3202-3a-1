@@ -67,7 +67,6 @@ const Home = () => {
   const analyzeResume = async () => {
     if (!resumeText) return; // Exit if no text to analyze
     setAnalysisResult(null); // Clear previous result
-    setTopicModelingResult(null); // Clear previous topics
     setLoading(true); // Set loading state
   
     try {
@@ -92,6 +91,7 @@ const Home = () => {
   // Send resume text for topic modeling (job role extraction)
   const analyzeTopics = async () => {
     if (!resumeText) return; // Exit if no text
+    setTopicModelingResult(null); // Clear previous topics
     setLoading(true); // Start loading
   
     try {
