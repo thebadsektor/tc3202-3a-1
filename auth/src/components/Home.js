@@ -173,7 +173,7 @@ const Home = () => {
       {/* Show topic modeling result if available */}
       {topicModelingResult && (
         <div className="card topic-result">
-          <h3>Extracted Topics:</h3>
+          <h3>Extracted Topics(Identified job roles):</h3>
           <ul>{topicModelingResult.map((topic, index) => (<li key={index}>{topic}</li>))}</ul>
         </div>
       )}
