@@ -149,7 +149,7 @@ List all the team members involved in the project. Include their roles and respo
 - **Hyroin Balili**: Lead Developer, Backend Developer
 - **Lester Malazarte**: Documentation
 - **Karl Angelo Neri**: Documentation
-- **Andrei Dawinan**: Documentation Frontend Developer
+- **Andrei Dawinan**: Documentation, Frontend Developer
 - **Gerald Villaran**: Course Instructor
 
 ## Project Timeline
