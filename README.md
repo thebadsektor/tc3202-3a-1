@@ -52,6 +52,17 @@ pdfjs-dist - To extract text from PDF resumes directly in the browser.
 Firebase Authentication - To handle user login and logout.
 Axios - To make HTTP request to the backend.
 
+Backend:
+Python (FastAPI) - Handle API endpoints and backend logic.
+NLTK - For natural language processing of resume text.
+Scikit-learn - For topic modeling using TF-IDF and LDA.
+Google Gemini API - For AI-powered resume analysis and suggestions.
+
+Tools and Libraries:
+axios - For making API calls from React to FastAPI.
+CORS Middleware - To allow frontend-backend communications.
+pydantic - For request validation in FastAPI.
+
 ## Setup and Installation
 Step-by-step instructions for setting up the project locally.
 
