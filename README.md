@@ -19,32 +19,38 @@
 ---
 
 ## Introduction
-Provide a brief introduction to the project. Explain the purpose, scope, and the problem it solves in a few sentences.
+The recruitment process today often involves reviewing a large number of resumes, a task that can be both time-consuming and tedious for hiring teams. As the volume of applications for each job opening continues to grow, manually screening resumes can lead to errors, delays, and missed opportunities. This highlights the need for a faster and more efficient way to evaluate resumes and streamline the hiring process.
 
 ## Project Overview
-Describe the project in detail. Include:
-- The project's background or context.
-- Its target audience or users.
-- Any real-world applications or potential impact.
+Many companies today receive a large number of resumes when hiring for a job. Reviewing each one manually takes a lot of time and can lead to mistakes or biased decisions. Thus, there is a clear need for a faster and more efficient way to screen resume.
+
+Resume Analyzer is a system developed by Computer Science students from Laguna University to assist HR teams bu automatically reading and analyzing resumes. Also to assist job seekers in improving their resumes and help recruiters screen applications more efficiently. The system leverages Natural Language Processing (NLP), Large Language Models (LLM), Latent Dirichlet Allocation (LDA) Unsupervised Machine Leaning for the Topic Modeling, and Artificial Intelligence (AI) to analyze and assess resume details.
 
 ## Objectives
-State the main objectives of the capstone project, such as:
-- Develop a solution for [problem].
-- Implement features to [goal].
-- Test and validate [key aspect].
+The main objective of the Resume Analyzer is to enhances the recruitment process by automating resume screening, detecting missing information, offering structured feedback, and providing analytical insights to both recruiters and job seekers.
+
+1. To extract and structure resume data, standardizing different formats using LLM-powered techniques.
+2. To detect and highlights missing or incomplete information in resumes, providing users with actionable feedback.
+3. To analyze resume context through skill gap assessments, keyword matching, and topic modeling.
+4. To provide recruiters with insightful analytics and data visualizations that support objective, data driven hiring decisions.
+5. To reduce bias in the screening process by standardizing resume evaluation criteria.
 
 ## Features
-List the main features of the project:
-- Feature 1: Brief description.
-- Feature 2: Brief description.
-- Feature 3: Brief description.
+The main features of the project:
+1. User Authentication - Users can log in and log out securely using Firebase.
+2. Resume Upload - Users can upload PDF resumes through a drag-and-drop interface.
+3. Text Extraction - Extracts text from uploaded resumes using pdfjs on the frontend.
+4. Resume Analysis (AI-Powered) - Sends resume text to Gemini API to analyze strenghts, weaknesses, and improvement suggestions.
+5. Job Role Detection (Topic Modeling) - Uses machine learning (LDA) to extract job roles or dominant topics from the resume.
 
 ## Technologies Used
-Mention the tools, frameworks, and technologies used in the project:
-- Programming Languages: [e.g., Python, JavaScript, etc.]
-- Frameworks/Libraries: [e.g., React, Flask, etc.]
-- Databases: [e.g., MySQL, MongoDB, etc.]
-- Other Tools: [e.g., Git, Docker, etc.]
+Frontend:
+JavaScript (React.js) - Core logic and UI rendering.
+CSS - Custom styling for components and layout.
+React Dropzone - For file upload (drag-and-drop feature).
+pdfjs-dist - To extract text from PDF resumes directly in the browser.
+Firebase Authentication - To handle user login and logout.
+Axios - To make HTTP request to the backend.
 
 ## Setup and Installation
 Step-by-step instructions for setting up the project locally.
@@ -68,28 +74,37 @@ Step-by-step instructions for setting up the project locally.
    ```
 4. **Run the project:**
    - For web projects:
-   ```bash
+   ```powershell
+   cd auth
    npm start
    ```
-   - IFor backend services:
-   ```bash
-   python app.py
+   - For backend services:
+   ```powershell
+   cd backend
+   uvicorn main:app --reload
    ```
 
 **Note:** If your project has external depencies like XAMPP, MySQL, special SDK, or other environemnt setup, create another section for it.
 
 ## Usage Instructions
 Provide detailed instructions on how to use the project after setup:
-- How to access the application.
-- Example commands or API calls (if applicable).
-- Databases: [e.g., MySQL, MongoDB, etc.]
-- Screenshots or GIFs showcasing key functionalities (optional).
-
-![UI Placeholder](https://via.placeholder.com/1200x700.png?text=UI+Placeholder)
-
-Another Screenshot
-
-![UI Placeholder](https://via.placeholder.com/1200x700.png?text=UI+Placeholder)
+Login
+- Navigate to http://localhost:3000
+- Login with your Firebase email/password
+Upload Resume
+- Drag & drop your PDF into the dropzone
+- Alternatively, click to select and upload
+Extract Text
+- Click "Extract Text" to extract content from your PDF
+Analyze Resume
+- Click "Analyze Resume" to send resume text to Gemini API
+- Results include personal details, skills, strengths, weaknesses, and improvement suggestions
+Analyze Topics
+- Click "Analyze Topics" to identify top job roles using topic modeling (LDA)
+Clear Data
+Click "Clear" to reset uploaded files and results
+Logout
+- Click "Logout" in the top-right corner
 
 ## Project Structure
 Explain the structure of the project directory. Example:
@@ -97,14 +112,21 @@ Explain the structure of the project directory. Example:
 .
 ├── 📂 src/
 │   ├── 📂 components/
-│   │   ├── <component>
-│   │   ├── <anotherComponent>
-│   │   └── ...
-│   ├── 📂 pages/
-│   └── 📂 utils/
-├── 📂 public/
-├── 📂 tests/
-├── .env.example
+│   │   ├── Home.js
+│   │   ├── Login.js
+│   │   └── Signup.js
+│   ├── 📂 styles/
+│       ├── Home.css
+│       ├── Login.css
+│       └── Sugnup.css
+├── 📂 backend/
+│   ├── 📂 _pycache_
+│   ├── 📂 venv
+│   ├── .env
+│   ├── main.py
+├── 📂 node_modules/
+├── .gitignore
+├── package-lock.json
 ├── package.json
 └── README.md
 ```
@@ -116,7 +138,7 @@ List all the team members involved in the project. Include their roles and respo
 - **Hyroin Balili**: Lead Developer, Backend Developer
 - **Lester Malazarte**: Documentation
 - **Karl Angelo Neri**: Documentation
-- **Andrei Dawinan**: Frontend Developer, UI/UX Designer
+- **Andrei Dawinan**: Documentation Frontend Developer
 - **Gerald Villaran**: Course Instructor
 
 ## Project Timeline
@@ -151,8 +173,10 @@ Outline the project timeline, including milestones or deliverables. Example:
 
 Acknowledge any resources, mentors, or external tools that helped in completing the project.
 
-This project was built from [Original Project Name](https://github.com/username/original-repo), created by [Original Author's Name]. You can view the original repository [here](https://github.com/username/original-repo).
+Special Thanks to Instructor Gerald Villaran, Joville Avilla, Mary Grace Guillermo for inspiration and guidance throughout the development of this project.
+
+This project was built and created by [GROUP 1 "The Resume Peeps"]. You can view the original repository [here](https://github.com/thebadsektor/tc3202-3a-1).
 
 ## License
 
-Specify the project's license. For starters, adapt the license of the original repository.
+This project is for educational purposes only.
