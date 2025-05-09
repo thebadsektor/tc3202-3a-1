@@ -1,4 +1,4 @@
-/* Signup.css */  
+/* Signup.css */
 .signup-wrapper {
   display: flex;
   height: 100vh;
@@ -66,6 +66,7 @@ h2 {
   font-size: 16px;
 }
 
+/* Base Button Styling */
 .btn {
   width: 100%;
   padding: 10px;
@@ -76,29 +77,42 @@ h2 {
   border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(0);
 }
 
 .btn:hover {
   background-color: #4c51bf;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
+/* Google Login Button */
 .google-btn {
   background-color: #db4437;
+  transition: all 0.3s ease;
 }
 
 .google-btn:hover {
   background-color: #c1351e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
+/* Secondary Button */
 .secondary-btn {
   background-color: #718096;
+  transition: all 0.3s ease;
 }
 
 .secondary-btn:hover {
   background-color: #4a5568;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
+/* Error Message Styling */
 .error-message {
   color: red;
   margin-bottom: 10px;

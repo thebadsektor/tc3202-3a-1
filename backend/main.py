@@ -198,7 +198,7 @@ def analyze_topics(request: ResumeRequest):
         return {"job_roles": ["Not enough text for analysis"]}
 
     # Chunk the resume text into smaller parts (optional: you can tweak chunk size as needed)
-    chunks = chunk_resume(cleaned_text, chunk_size=110)
+    chunks = chunk_resume(cleaned_text, chunk_size=100)
 
     # Convert chunks to vector format using TF-IDF
     vectorizer = TfidfVectorizer(max_features=2000)
@@ -210,7 +210,8 @@ def analyze_topics(request: ResumeRequest):
 
     # Run LDA for topic modeling
     lda = LatentDirichletAllocation(n_components=1, random_state=42, max_iter=10)
-    lda.fit(X)
+    lda.fit(X) #random_state is used for consistent output. 
+        #max_iter is to controls the maximum number of iterations(repetition) for the LDA algorithm during training.
 
     # Extract top keywords as job roles
     job_roles = []
