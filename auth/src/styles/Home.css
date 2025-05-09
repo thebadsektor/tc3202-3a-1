@@ -1,30 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
 body {
   background-image: url('/public/Image/Background/landing_bg.jpg');
-  font-family: 'Arial', sans-serif;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #212529;
 }
 
+/* Layout Container */
 .home-container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 20px;
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
 }
 
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #007bff;
   color: white;
-  padding: 15px;
-  border-radius: 8px;
+  padding: 15px 20px;
+  border-radius: 12px;
+  font-size: 18px;
 }
 
+/* Cards */
 .card {
   background: white;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 .card h2 {
@@ -33,26 +50,35 @@ body {
   max-width: 100%;
 }
 
+/* Dropzone */
 .dropzone {
   border: 2px dashed #007bff;
   padding: 30px;
   text-align: center;
-  background: #eaf4ff;
+  background: #f0f8ff;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+  border-radius: 10px;
 }
 
 .dropzone:hover {
-  background: #d0e6ff;
+  background: #e6f2ff;
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.2);
 }
 
+/* Buttons */
 .btn {
-  padding: 10px 15px;
+  padding: 10px 16px;
+  font-size: 15px;
+  font-weight: 600;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s ease;
 }
 
 .btn.logout-btn {
@@ -68,6 +94,7 @@ body {
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .clear-btn {
@@ -98,36 +125,31 @@ body {
   background: #1e7e34;
 }
 
-/* Resume Analysis Styling */
-.analysis-result {
-  background: #fffbea;
-  border-left: 5px solid #f4c542;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Analysis Result */
+.analysis-result, .topic-result {
+  background: #fff;
+  border-left: 5px solid #007bff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .analysis-result pre {
-  white-space: pre-wrap; /* Ensures text wraps */
+  white-space: pre-wrap;
   word-wrap: break-word;
   overflow-wrap: break-word;
   max-width: 100%;
-  padding: 10px;
-  background-color: #f8f9fa; /* Light background */
-  border-radius: 5px;
-}
-
-/* Extracted Topics Styling (Same as Resume Analysis) */
-.topic-result {
-  background: #f8f9fa; /* Light gray background */
   padding: 15px;
-  border-radius: 8px;
-  border-left: 5px solid #007bff; /* Blue left border */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: 'Courier New', monospace;
+  border-radius: 6px;
 }
 
+/* Topics Styling */
 .topic-result h3 {
   color: #007bff;
+  margin-bottom: 10px;
 }
 
 .topic-result ul {
@@ -136,13 +158,14 @@ body {
 }
 
 .topic-result li {
-  background: #e3f2fd; /* Light blue background */
+  background: #e3f2fd;
   margin: 5px 0;
   padding: 8px;
   border-radius: 5px;
   font-weight: bold;
 }
 
+/* Loader */
 .loader-container {
   display: flex;
   align-items: center;
@@ -184,13 +207,11 @@ body {
   }
 }
 
-/* ============================= */
-/* ✅ Mobile-Responsive Styling  */
-/* ============================= */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .home-container {
-    padding: 10px;
-    margin: 20px auto;
+    padding: 20px;
+    margin: 30px auto;
   }
 
   .header {
@@ -215,5 +236,9 @@ body {
 
   .analyze-btn {
     margin-top: 10px;
+  }
+
+  .card, .dropzone, .analysis-result, .topic-result {
+    padding: 16px;
   }
 }
