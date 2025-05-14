@@ -161,7 +161,7 @@ Resume:
         }]
     }
 
-    GOOGLE_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
+    GOOGLE_API_URL = "Get your own URL as well, in google ai studio"
 
     # Send POST request to Gemini API
     try:
